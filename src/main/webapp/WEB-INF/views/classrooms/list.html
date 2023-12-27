@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="/layout/head"/>
+    <title>List Classroom</title>
+</head>
+<body>
+<div class="container-fluid">
+    <header>
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand">List Classroom</a>
+                <div class="d-flex" style="gap: 10px;">
+                    <a th:href="@{/students}">
+                        <button type="button" class="btn btn-outline-light">
+                            List students
+                        </button>
+                    </a>
+                    <a th:href="@{/students/create}">
+                        <button type="button" class="btn btn-outline-light">
+                            <i class="far fa-plus-square"></i>
+                            Add new student
+                        </button>
+                    </a>
+                    <a th:href="@{/classrooms/create}">
+                        <button type="button" class="btn btn-outline-light">
+                            <i class="far fa-plus-square"></i>
+                            Add new class
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="content">
+        <table id="tbCustomer" class="table table-hover">
+            <thead>
+            <tr>
+                <td>STT</td>
+                <td>ID</td>
+                <td>Name</td>
+                <td>Action</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cr,status : ${classrooms}">
+                <td th:text="${status.count}"></td>
+                <td th:text="${cr.id}"></td>
+                <td th:text="${cr.name}"></td>
+                <td>
+                    <a th:href="@{/classrooms/update/{id}(id=${cr.id})}">
+                        <button>Update</button>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+
+    </footer>
+</div>
+</body>
+</html>

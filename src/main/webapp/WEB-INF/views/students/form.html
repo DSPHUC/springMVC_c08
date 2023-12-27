@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <th:block th:replace="/layout/head"/>
+    <title>student</title>
+    <style>
+        #lbForm div {
+            margin-bottom: 10px;
+        }
+
+        #lbForm label {
+            display: inline-block;
+            width: 100px; /* Đặt chiều rộng của label theo nhu cầu */
+        }
+
+        #lbForm input,
+        #lbForm select {
+            width: 200px; /* Đặt chiều rộng của input và select theo nhu cầu */
+            padding: 5px;
+            margin-bottom: 5px;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <header>
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand"> Student</a>
+                <div class="d-flex" style="gap: 10px;">
+                    <a th:href="@{/students}">
+                        <button type="button" class="btn btn-outline-light">
+                            Back List
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <form method="post" th:object="${student}">
+            <div class="row mb-3 mt-3" id="lbForm">
+                <div>
+                    <label for="name">Name</label>
+                    <input type="text" id="name" th:field="*{name}"/>
+                    <h6 th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red"></h6>
+                </div>
+                <div>
+                    <label for="age">Age</label>
+                    <input type="number" id="age" th:field="*{age}"/>
+                    <h6 th:if="${#fields.hasErrors('age')}" th:errors="*{age}" style="color: red"></h6>
+                </div>
+                <div>
+                    <label for="gender">Gender</label>
+                    <select name="gender" id="gender" th:field="*{gender}">
+                        <option value="">-- Select a gender --</option>
+                        <option value="MALE">Male</option>
+                        <option value="FEMALE">Female</option>
+                        <option value="OTHER">Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="address">Address</label>
+                    <input type="text" id="address" th:field="*{address}"/>
+                </div>
+                <div>
+                    <label for="classroom">Classroom</label>
+                    <select name="classroom" id="classroom" th:field="*{classroom}">
+                        <option value="">-- Select a classroom --</option>
+                        <option th:each="cr : ${classrooms}"
+                                th:value="${cr.id}"
+                                th:text="${cr.name}"></option>
+                    </select>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Save"/>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

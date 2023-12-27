@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="/layout/head"/>
+    <title>Create</title>
+    <style>
+        #lbForm div {
+            margin-bottom: 10px;
+        }
+
+        #lbForm label {
+            display: inline-block;
+            width: 100px; /* Đặt chiều rộng của label theo nhu cầu */
+        }
+
+        #lbForm input,
+        #lbForm select {
+            width: 200px; /* Đặt chiều rộng của input và select theo nhu cầu */
+            padding: 5px;
+            margin-bottom: 5px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <header>
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand">Add Student</a>
+                <div class="d-flex" style="gap: 10px;">
+                    <a th:href="@{/classrooms}">
+                        <button type="button" class="btn btn-outline-light">
+                            Back List
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <form method="post" th:object="${classroom}">
+            <div class="row mb-3 mt-3" id="lbForm">
+                <div>
+                    <label for="name" class="form-label">Classroom</label>
+                    <input type="text" class="form-control" id="name" th:field="*{name}">
+                </div>
+                <input type="submit" class="btn btn-primary" value="Save"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
