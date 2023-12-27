@@ -52,9 +52,10 @@ public class StudentController {
 
     @PostMapping("/create")
     public ModelAndView save(@Valid @ModelAttribute Student student, BindingResult bindingResult) {
-        ModelAndView modelAndView ;
+        ModelAndView modelAndView;
         if (bindingResult.hasFieldErrors()) {
             modelAndView = new ModelAndView("/students/form");
+
             return modelAndView;
         }
         studentService.save(student);

@@ -10,7 +10,7 @@
 
         #lbForm label {
             display: inline-block;
-            width: 100px; /* Đặt chiều rộng của label theo nhu cầu */
+            width: auto; /* Đặt chiều rộng của label theo nhu cầu */
         }
 
         #lbForm input,
@@ -42,8 +42,9 @@
         <form method="post" th:object="${classroom}">
             <div class="row mb-3 mt-3" id="lbForm">
                 <div>
-                    <label for="name" class="form-label">Classroom</label>
+                    <label for="name" class="form-label">Classroom name</label>
                     <input type="text" class="form-control" id="name" th:field="*{name}">
+                    <h6 th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red"></h6>
                 </div>
                 <input type="submit" class="btn btn-primary" value="Save"/>
             </div>

@@ -4,8 +4,11 @@ import com.example.examplethymeleafspringmvc.model.Classroom;
 import com.example.examplethymeleafspringmvc.service.classroom.IClassroomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/classrooms")
@@ -28,8 +31,15 @@ public class ClassroomController {
     }
 
     @PostMapping("/create")
-    public ModelAndView save(Classroom classroom) {
-        ModelAndView modelAndView = new ModelAndView("redirect:/classrooms");
+    public ModelAndView save(@Valid Classroom classroom, BindingResult bindingResult) {
+        ModelAndView modelAndView;
+        new Classroom().validate(classroom, bindingResult);
+        if (bindingResult.hasFieldErrors()) {
+            modelAndView = new ModelAndView("/classrooms/form");
+
+            return modelAndView;
+        }
+        modelAndView = new ModelAndView("redirect:/classrooms");
         classroomService.save(classroom);
         return modelAndView;
     }
